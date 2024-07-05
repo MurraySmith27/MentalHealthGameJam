@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=3 format=3 uid="uid://cgv4u1wi5esax"]
+
+[ext_resource type="Script" path="res://Items/ItemsScript/InventoryItems.gd" id="1_ympps"]
+[ext_resource type="Texture2D" uid="uid://bttkjksvld2r1" path="res://icon.svg" id="2_6diw1"]
+
+[resource]
+script = ExtResource("1_ympps")
+name = "GodotTestItem"
+texture = ExtResource("2_6diw1")

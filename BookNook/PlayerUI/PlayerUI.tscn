@@ -1,0 +1,84 @@
+[gd_scene load_steps=7 format=3 uid="uid://bvd70eppfowsn"]
+
+[ext_resource type="Script" path="res://PlayerUI/PlayerUI.gd" id="1_hpkub"]
+[ext_resource type="Texture2D" uid="uid://bttkjksvld2r1" path="res://icon.svg" id="1_kurvp"]
+[ext_resource type="Script" path="res://PlayerUI/OptionsMenu.gd" id="2_ew148"]
+[ext_resource type="PackedScene" uid="uid://4luelgyga01m" path="res://PlayerUI/health_bar.tscn" id="3_qntwf"]
+[ext_resource type="PackedScene" uid="uid://tsiyq6827cps" path="res://PlayerUI/Inventory_UI.tscn" id="4_d7740"]
+[ext_resource type="PackedScene" uid="uid://om7a3ehf2xes" path="res://PlayerUI/OptionMenuUI.tscn" id="6_01gfv"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+script = ExtResource("1_hpkub")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+
+[node name="Inventory_UI" parent="MarginContainer/VBoxContainer" instance=ExtResource("4_d7740")]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 50)
+layout_mode = 2
+theme_override_constants/h_separation = 100
+columns = 5
+
+[node name="HealthBar" parent="MarginContainer/VBoxContainer/GridContainer" instance=ExtResource("3_qntwf")]
+custom_minimum_size = Vector2(400, 40)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="ColorRect2" type="ColorRect" parent="MarginContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/GridContainer/ColorRect2"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="OptionsMenu" type="NinePatchRect" parent="."]
+unique_name_in_owner = true
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -103.0
+offset_top = -145.0
+offset_right = 103.0
+offset_bottom = 145.0
+grow_horizontal = 2
+grow_vertical = 2
+rotation = -0.00121751
+texture = ExtResource("1_kurvp")
+region_rect = Rect2(0, 0, 128, 128)
+patch_margin_left = 50
+patch_margin_top = 50
+patch_margin_right = 50
+patch_margin_bottom = 50
+script = ExtResource("2_ew148")
+
+[node name="Control" parent="OptionsMenu" instance=ExtResource("6_01gfv")]
+layout_mode = 1
+anchors_preset = 14
+anchor_left = 0.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 0.0
+offset_top = -49.0
+offset_right = 0.0
+offset_bottom = 49.0

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="Inventory" load_steps=3 format=3 uid="uid://c3kdox8j6x7xi"]
+
+[ext_resource type="Resource" uid="uid://cgv4u1wi5esax" path="res://Items/GodotItem.tres" id="1_p5aef"]
+[ext_resource type="Script" path="res://Items/ItemsScript/Inventory.gd" id="2_8ggfe"]
+
+[resource]
+script = ExtResource("2_8ggfe")
+items = Array[Resource("res://Items/ItemsScript/InventoryItems.gd")]([ExtResource("1_p5aef"), null, null, null, null, null, ExtResource("1_p5aef"), null, null, null, null, ExtResource("1_p5aef"), ExtResource("1_p5aef"), null, ExtResource("1_p5aef")])
