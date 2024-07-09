@@ -1,0 +1,32 @@
+[gd_scene load_steps=5 format=3 uid="uid://rcl0lakc7b63"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3g1sk"]
+radius = 0.6
+height = 1.9
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_fped2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gn0pw"]
+albedo_color = Color(0.921569, 0, 0.168627, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_1v6wy"]
+
+[node name="Node3D" type="CharacterBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_3g1sk")
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
+mesh = SubResource("CapsuleMesh_fped2")
+surface_material_override/0 = SubResource("StandardMaterial3D_gn0pw")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.362175, -0.0739617)
+mesh = SubResource("SphereMesh_1v6wy")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.758604, 1.63303)
+top_level = true
+current = true
