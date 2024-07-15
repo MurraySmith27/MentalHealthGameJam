@@ -1,4 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://rcl0lakc7b63"]
+[gd_scene load_steps=6 format=3 uid="uid://rcl0lakc7b63"]
+
+[ext_resource type="Script" path="res://Player/temp3dPlayer.gd" id="1_3mq7n"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_3g1sk"]
 radius = 0.6
@@ -11,7 +13,8 @@ albedo_color = Color(0.921569, 0, 0.168627, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_1v6wy"]
 
-[node name="Node3D" type="CharacterBody3D"]
+[node name="Node3D" type="CharacterBody3D" groups=["player"]]
+script = ExtResource("1_3mq7n")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_3g1sk")
@@ -25,8 +28,3 @@ surface_material_override/0 = SubResource("StandardMaterial3D_gn0pw")
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.362175, -0.0739617)
 mesh = SubResource("SphereMesh_1v6wy")
-
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.758604, 1.63303)
-top_level = true
-current = true

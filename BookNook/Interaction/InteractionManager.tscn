@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://6um55iwysa0n"]
+
+[ext_resource type="Script" path="res://Interaction/InteractionManager.gd" id="1_td53o"]
+
+[node name="InteractionManager" type="Node3D"]
+script = ExtResource("1_td53o")
+
+[node name="Label3D" type="Label3D" parent="."]
+pixel_size = 0.03
+text = "[E] To Interact"

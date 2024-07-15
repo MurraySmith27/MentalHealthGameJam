@@ -1,29 +1,83 @@
-[gd_scene load_steps=5 format=3 uid="uid://bs5oog1p0kry1"]
+[gd_scene load_steps=14 format=3 uid="uid://bs5oog1p0kry1"]
 
 [ext_resource type="PackedScene" uid="uid://rcl0lakc7b63" path="res://Player/temp3dPlayer.tscn" id="1_47uun"]
+[ext_resource type="PackedScene" uid="uid://cksrw4aemhnc6" path="res://Level/testlevel.tscn" id="1_dovk8"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="2_kxdp1"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_3d.gd" id="3_7vjam"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="4_7c40e"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/camera_3d_resource.gd" id="5_l1hlu"]
+[ext_resource type="PackedScene" uid="uid://dt5vh6jysgh07" path="res://Objects/Chest.fbx" id="7_biklp"]
+[ext_resource type="Script" path="res://Objects/Chest.gd" id="8_8dnpa"]
+[ext_resource type="PackedScene" uid="uid://c01tgdx0ctq7t" path="res://Interaction/InteractionArea.tscn" id="9_g2deb"]
 
-[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_y1huq"]
+[sub_resource type="Resource" id="Resource_n2f1t"]
+script = ExtResource("4_7c40e")
+duration = 1.0
+transition = 0
+ease = 2
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_oqa7n"]
-size = Vector2(20, 10)
+[sub_resource type="Resource" id="Resource_02s6c"]
+script = ExtResource("5_l1hlu")
+cull_mask = 1048575
+h_offset = 0.0
+v_offset = 0.0
+projection = 0
+fov = 75.0
+size = 1.0
+frustum_offset = Vector2(0, 0)
+near = 0.05
+far = 4000.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_um73p"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_idcjb"]
+size = Vector3(3, 3, 3)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_cni7a"]
+radius = 4.08921
 
 [node name="TestEnviro" type="Node3D"]
 
-[node name="Node3D" type="Node3D" parent="."]
-
-[node name="StaticBody3D" type="StaticBody3D" parent="Node3D"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Node3D/StaticBody3D"]
-shape = SubResource("WorldBoundaryShape3D_y1huq")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Node3D"]
-mesh = SubResource("PlaneMesh_oqa7n")
-surface_material_override/0 = SubResource("StandardMaterial3D_um73p")
-
-[node name="Node3D2" parent="." instance=ExtResource("1_47uun")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.11393, 1.54876, 0)
+[node name="Floor" parent="." instance=ExtResource("1_dovk8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 6, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.18949, 0.981883, 0, -0.981883, 0.18949, 0, 9.13037, 0)
+transform = Transform3D(1, 0, 0, 0, 0.18949, 0.981883, 0, -0.981883, 0.18949, 0, 28.605, 4.63742)
+
+[node name="Node3D2" parent="." instance=ExtResource("1_47uun")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.11393, 8.03053, 5.80602)
+
+[node name="MainCamera" type="Camera3D" parent="."]
+transform = Transform3D(0.999997, 0, 0, 0, 0.871209, 0.490902, 0, -0.490901, 0.871211, -5.11393, 12.5214, 13.6772)
+
+[node name="PhantomCameraHost" type="Node" parent="MainCamera"]
+script = ExtResource("2_kxdp1")
+
+[node name="PhantomCamera3D" type="Node3D" parent="." node_paths=PackedStringArray("follow_target")]
+transform = Transform3D(0.999997, 0, 0, 0, 0.871209, 0.490902, 0, -0.490901, 0.871211, -5.11393, 12.5214, 13.6772)
+script = ExtResource("3_7vjam")
+priority = 3
+follow_mode = 5
+follow_target = NodePath("../Node3D2")
+tween_resource = SubResource("Resource_n2f1t")
+camera_3d_resource = SubResource("Resource_02s6c")
+follow_offset = Vector3(0, 4, 7)
+dead_zone_width = 0.746
+dead_zone_height = 0.326
+
+[node name="Chest" parent="." instance=ExtResource("7_biklp")]
+transform = Transform3D(-0.011292, 0, -0.999936, 0, 1, 0, 0.999936, 0, -0.011292, 1.16304, 6.95468, -5.96093)
+script = ExtResource("8_8dnpa")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Chest"]
+transform = Transform3D(1, 0, -6.33299e-08, 0, 1, 0, 6.33299e-08, 0, 1, -0.0120888, 1.14027, -0.00706089)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Chest/StaticBody3D"]
+transform = Transform3D(1, 0, 9.31323e-10, 0, 1, 0, -9.31323e-10, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_idcjb")
+
+[node name="InteractionArea" parent="Chest" instance=ExtResource("9_g2deb")]
+transform = Transform3D(1, 0, -2.79397e-09, 0, 1, 0, 2.79397e-09, 0, 1, 0, 0, 0)
+action_name = "open"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Chest/InteractionArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("SphereShape3D_cni7a")
